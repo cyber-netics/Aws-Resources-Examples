@@ -1,7 +1,9 @@
 {
   "scripts": {
     "build": "tsc",
-    "test": "jest ./test",
+    "test": "jest",
+    "test:all": "npm run test && npm run test:cdk",
+    "test:cdk": "cd cdk && npm run test",
     "cdk:deploy": "cd cdk && npm run deploy",
     "setup": "npm run setup:cdk && npm run setup:app",
     "setup:cdk": "cd cdk && npm install",
@@ -10,6 +12,12 @@
   "devDependencies": {
     "@types/node": "^15.12.1",
     "dotenv": "^10.0.0",
-    "ts-node": "^10.0.0"
+    "jest": "^27.0.4",
+    "ts-node": "^10.0.0",
+    "@types/jest": "^26.0.23",
+    "ts-jest": "^27.0.3"
+  },
+  "dependencies": {
+    "aws-sdk": "^2.922.0"
   }
 }

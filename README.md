@@ -22,3 +22,8 @@
     npm install
     npm run deploy
 ```
+
+4. Test
+```
+    npm run test:cdk
+```

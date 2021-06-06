@@ -18,11 +18,8 @@
     "strictPropertyInitialization": false,
     "typeRoots": ["./node_modules/@types"],
     "baseUrl": ".",
-    "outDir": "cdk.out",
-    "paths": {
-      "@lib/*": ["lib/*"]
-    }
+    "outDir": "cdk.out"
   },
-  "exclude": ["cdk.out", "test"],
-  "include": ["lib", "bin"]
+  "exclude": ["cdk.out"],
+  "include": ["lib", "bin", "./test"]
 }
