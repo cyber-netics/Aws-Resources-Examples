@@ -2,9 +2,7 @@
 
 - Aws basic Dynamodb cdk and Api example
 
-## CDK
-- Create Infrastructure with aws cdk
-
+### CDK - Create Infrastructure with aws cdk
 1. Add Environmental Variables `.env` file
 ```
     AWS_ACCESS_KEY_ID=<accessKeyId>
