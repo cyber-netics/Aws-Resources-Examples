@@ -1,10 +1,8 @@
 import * as cdk from "@aws-cdk/core";
 import * as dynamodb from "@aws-cdk/aws-dynamodb";
+import { IProps, ITable, IDynamodb } from "./iface";
 
-import { IProps, ITable } from "./iface";
-export { IDynamodb } from "./iface";
-
-export default class Dynamodb {
+export default class Dynamodb implements IDynamodb {
   public readonly table: ITable;
 
   constructor(self: cdk.Stack, id: string, props: IProps) {

@@ -1,1 +1,1 @@
-import * as env from "@Env/index";
+export const test = {};

@@ -10,3 +10,5 @@ new CdkStack(app, env.appName, {
     region: env.region,
   },
 });
+
+app.synth();

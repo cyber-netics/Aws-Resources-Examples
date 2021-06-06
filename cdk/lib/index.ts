@@ -1,8 +1,8 @@
 import { Construct, Stack, StackProps } from "@aws-cdk/core";
-import Dynamodb, { IDynamodb } from "./Dynamodb";
+import Dynamodb from "../lib/dynamodb";
 
 export class CdkStack extends Stack {
-  public readonly dynamodb: IDynamodb;
+  public readonly dynamodb: Dynamodb;
 
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);

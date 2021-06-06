@@ -2,6 +2,7 @@
   "scripts": {
     "build": "tsc",
     "test": "jest ./test",
+    "cdk:deploy": "cd cdk && npm run deploy",
     "setup": "npm run setup:cdk && npm run setup:app",
     "setup:cdk": "cd cdk && npm install",
     "setup:app": "npm install"
