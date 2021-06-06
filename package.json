@@ -1,8 +1,14 @@
 {
   "scripts": {
     "build": "tsc",
-    "setup": "npm run setup:cdk && npm run setup:src",
+    "test": "jest ./test",
+    "setup": "npm run setup:cdk && npm run setup:app",
     "setup:cdk": "cd cdk && npm install",
-    "setup:src": "cd src && npm install"
+    "setup:app": "npm install"
+  },
+  "devDependencies": {
+    "@types/node": "^15.12.1",
+    "dotenv": "^10.0.0",
+    "ts-node": "^10.0.0"
   }
 }
