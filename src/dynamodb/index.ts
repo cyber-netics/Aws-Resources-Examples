@@ -6,18 +6,18 @@ import {
 } from "./iface";
 
 export class InstanceController {
-  private db;
-  private dbClient;
+  private _db;
+  private _dbClient;
   public tableName: string;
 
   constructor({ db, dbClient, tableName }: IController) {
-    this.db = db;
-    this.dbClient = dbClient;
+    this._db = db;
+    this._dbClient = dbClient;
     this.tableName = tableName;
   }
 
   public async createUser(item: InputAttrMap): IPutItemOutput {
-    return await this.db
+    return await this._db
       .putItem({
         TableName: this.tableName,
         Item: item,
@@ -26,7 +26,7 @@ export class InstanceController {
   }
 
   public async findUser(userId: string): IQueryOutput {
-    return await this.dbClient
+    return await this._dbClient
       .query({
         TableName: this.tableName,
         KeyConditionExpression: "PK = :pk",
