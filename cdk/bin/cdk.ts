@@ -7,7 +7,7 @@ import { env } from "../../util";
 const app = new cdk.App();
 new CdkStack(app, env.appName, {
   env: {
-    region: env.region,
+    region: env.aws.region,
   },
 });
 

@@ -1,12 +1,22 @@
-import * as AWS from "aws-sdk";
-import { ItemProps, IUserData } from "./iface";
+import {
+  IController,
+  InputAttrMap,
+  IPutItemOutput,
+  IQueryOutput,
+} from "./iface";
 
 export class InstanceController {
-  protected readonly db: any;
-  protected readonly dbClient: any;
-  public readonly tableName: string;
+  private db;
+  private dbClient;
+  public tableName: string;
 
-  public async createUser(item: ItemProps): Promise<void> {
+  constructor({ db, dbClient, tableName }: IController) {
+    this.db = db;
+    this.dbClient = dbClient;
+    this.tableName = tableName;
+  }
+
+  public async createUser(item: InputAttrMap): IPutItemOutput {
     return await this.db
       .putItem({
         TableName: this.tableName,
@@ -15,7 +25,7 @@ export class InstanceController {
       .promise();
   }
 
-  public async findUser(userId: string): Promise<IUserData> {
+  public async findUser(userId: string): IQueryOutput {
     return await this.dbClient
       .query({
         TableName: this.tableName,
@@ -25,19 +35,5 @@ export class InstanceController {
         },
       })
       .promise();
-  }
-}
-
-export default class DynamoInstance extends InstanceController {
-  protected readonly db: any;
-  protected readonly dbClient: any;
-  public readonly tableName: string;
-
-  constructor({ aws, tableName }: any) {
-    super();
-
-    this.tableName = tableName;
-    this.db = new AWS.DynamoDB(aws);
-    this.dbClient = new AWS.DynamoDB.DocumentClient(aws);
   }
 }

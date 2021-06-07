@@ -29,6 +29,7 @@ export const tableSchema = {
 };
 
 export const userId = "user:id:1234";
+
 export const userDataSchema = {
   PK: {
     S: userId,

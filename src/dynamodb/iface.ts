@@ -1,3 +1,5 @@
+import * as AWS from "aws-sdk";
+
 export interface ItemProps {
   PK: {
     S: string;
@@ -16,14 +18,12 @@ export interface ItemProps {
   };
 }
 
-export interface IUserData {
-  Item: {
-    PK: string;
-    SK: string;
-    Email: string;
-    FullName: string;
-    Created_At: string;
-  };
-  Count: number;
-  ScannedCount: number;
+export interface IController {
+  db: AWS.DynamoDB;
+  dbClient: AWS.DynamoDB.DocumentClient;
+  tableName: string;
 }
+
+export type InputAttrMap = AWS.DynamoDB.PutItemInputAttributeMap;
+export type IQueryOutput = Promise<AWS.DynamoDB.QueryOutput | AWS.AWSError>;
+export type IPutItemOutput = Promise<AWS.DynamoDB.PutItemOutput | AWS.AWSError>;

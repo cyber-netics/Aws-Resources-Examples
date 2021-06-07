@@ -1,59 +1,54 @@
-const AWS = require("aws-sdk");
-const { InstanceController } = require("../src/dynamodb");
-const {
+import * as AWS from "aws-sdk";
+import { InstanceController } from "../src/dynamodb";
+import {
   tableSchema,
   userDataSchema,
   userQueryData,
   userId,
-} = require("./mock/dbMock");
+} from "./mock/dynamo";
 
-export default class DynamoDb extends InstanceController {
-  protected db: any;
-  public dbClient: any;
+// Vars
+const endpoint = "http://localhost:8000";
+const tableName = "MyTableName";
+const region = "us-east-2";
 
-  constructor({ tableName }: any) {
-    super();
-    this.initialize();
-    this.tableName = tableName;
-  }
+// AWS Dynamo sdk
+AWS.config.update({ region });
+const db = new AWS.DynamoDB({ endpoint });
+const dbClient = new AWS.DynamoDB.DocumentClient({ endpoint });
 
-  initialize() {
-    AWS.config.update({ region: "us-east-2" });
-    AWS.config.update({ endpoint: "http://localhost:8000" });
-    this.db = new AWS.DynamoDB({ apiVersion: "2012-08-10" });
-    this.dbClient = new AWS.DynamoDB.DocumentClient({
-      apiVersion: "2012-08-10",
-    });
-  }
-
-  async createTable() {
-    await this.db
-      .createTable({
-        TableName: this.tableName,
-        ...tableSchema,
-      })
-      .promise();
-  }
-
-  async deleteTable() {
-    await this.db
-      .deleteTable({
-        TableName: this.tableName,
-      })
-      .promise();
-  }
-}
-
-const dynamodb = new DynamoDb({
-  tableName: "TABLE_NAME",
+// Custom Dynamo controller
+const dynamodb = new InstanceController({
+  db,
+  dbClient,
+  tableName,
 });
 
+// Custom db handlers
+const createTable = async () => {
+  await db
+    .createTable({
+      TableName: tableName,
+      ...tableSchema,
+    })
+    .promise();
+};
+
+const deleteTable = async () => {
+  await db
+    .deleteTable({
+      TableName: tableName,
+    })
+    .promise();
+};
+
+// Test
 beforeAll(async () => {
-  await dynamodb.createTable();
+  await createTable();
 });
 
 afterAll(async () => {
-  await dynamodb.deleteTable();
+  await deleteTable();
 });
 
 describe("DynamoDB Tests", () => {
