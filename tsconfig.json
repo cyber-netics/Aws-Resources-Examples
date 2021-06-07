@@ -18,5 +18,5 @@
     "outDir": "dist"
   },
   "exclude": ["node_modules"],
-  "include": ["src", "util"]
+  "include": ["src", "util", "test"]
 }
