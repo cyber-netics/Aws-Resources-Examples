@@ -9,10 +9,10 @@ export class CdkStack extends Stack {
   constructor(scope: Construct, id: string, props?: StackProps) {
     super(scope, id, props);
 
-    this.dynamodb = new Dynamodb(this, `${id}-Dynamodb`, {
+    this.dynamodb = new Dynamodb(this, id, {
       tableName: id,
     });
 
-    this.lambda = new Lambda(this, `${id}-Lambda`);
+    this.lambda = new Lambda(this, id);
   }
 }

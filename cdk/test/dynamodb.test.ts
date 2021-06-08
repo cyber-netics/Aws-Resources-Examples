@@ -1,5 +1,5 @@
-import { expect as expectCDK, SynthUtils, haveResource } from "@aws-cdk/assert";
 import * as cdk from "@aws-cdk/core";
+import { expect as expectCDK, SynthUtils, haveResource } from "@aws-cdk/assert";
 
 import Dynamodb from "../lib/dynamodb";
 import * as mock from "./mock/dynamodb";
@@ -13,7 +13,7 @@ beforeEach(() => {
 });
 
 describe("Dynamodb", () => {
-  test("Resources", () => {
+  it("Stack", () => {
     new Dynamodb(stack, "MyappStack", {
       tableName: "MyappStack",
     });

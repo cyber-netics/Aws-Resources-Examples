@@ -3,6 +3,7 @@
     "target": "ES2018",
     "module": "commonjs",
     "lib": ["es2018"],
+    "resolveJsonModule": true,
     "strict": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
@@ -21,5 +22,5 @@
     "outDir": "cdk.out"
   },
   "exclude": ["cdk.out"],
-  "include": ["lib", "bin", "./test"]
+  "include": ["lib", "bin", "test"]
 }

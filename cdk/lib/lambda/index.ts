@@ -1,12 +1,26 @@
-import { Stack } from "@aws-cdk/core";
+import { Stack, CfnOutput } from "@aws-cdk/core";
 import Triggers from "./triggers";
+import Permissions from "./permissions";
 
-class Lambda {
-  public triggers: Triggers;
-
-  constructor(self: Stack, nameId: string) {
-    this.triggers = new Triggers(self, `${nameId}-Triggers`);
-  }
+interface ILambda {
+  triggers: Triggers;
+  lambdaPolicy: Permissions;
 }
 
-export default Lambda;
+export default class Lambda implements ILambda {
+  public triggers: Triggers;
+  public lambdaPolicy: Permissions;
+
+  constructor(self: Stack, id: string) {
+    this.lambdaPolicy = new Permissions(self, `${id}`, {
+      servicePrincipal: "lambda",
+      roles: {
+        dynamoFullAccess: ["CloudWatchFullAccess", "AmazonDynamoDBFullAccess"],
+      },
+    });
+
+    this.triggers = new Triggers(self, `${id}-Triggers`, {
+      roles: this.lambdaPolicy.roles,
+    });
+  }
+}
