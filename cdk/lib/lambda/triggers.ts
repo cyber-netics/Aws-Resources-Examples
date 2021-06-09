@@ -8,6 +8,9 @@ interface ILambdaTriggers {
 }
 
 interface IProps {
+  readonly env: {
+    [key: string]: string;
+  };
   readonly roles: {
     [key: string]: Role;
   };
@@ -29,14 +32,15 @@ export default class LambdaTriggers implements ILambdaTriggers {
   constructor(self: Stack, id: string, props: IProps) {
     this.preSignUp = new Function(self, `${id}-preSignUp`, {
       code: Assets.preSignUp,
-      handler: "preSignUp.handler",
+      handler: "index.handler",
       runtime: Runtime.NODEJS_12_X,
       role: props.roles.dynamoFullAccess,
+      environment: props.env,
     });
 
     this.postAuth = new Function(self, `${id}-postAuth`, {
       code: Assets.postAuth,
-      handler: "postAuth.handler",
+      handler: "index.handler",
       runtime: Runtime.NODEJS_12_X,
       role: props.roles.dynamoFullAccess,
     });

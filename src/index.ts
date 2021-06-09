@@ -28,8 +28,7 @@ const create = async () => {
 };
 
 const Find = async () => {
-  const test = await dynamodb.findUser("user:id:123");
-  console.log("test", test);
+  return await dynamodb.findUser("user:id:123");
 };
 
 (async () => {
